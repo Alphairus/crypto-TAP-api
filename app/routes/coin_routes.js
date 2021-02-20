@@ -1,7 +1,7 @@
 const express = require('express')
 const passport = require('passport')
 
-const Coin = required('../models/coin.js')
+const Coin = require('../models/coins.js')
 
 const customErrors = require('../../lib/custom_errors')
 
