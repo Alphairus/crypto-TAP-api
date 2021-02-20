@@ -1,5 +1,5 @@
 const express = require('express')
-const passport = required('passport')
+const passport = require('passport')
 
 const Coin = required('../models/coin.js')
 
