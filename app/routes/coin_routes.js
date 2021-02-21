@@ -63,8 +63,8 @@ router.delete('/coins/:id', requireToken, (req, res, next) => {
     .catch(next)
 })
 
-SHOW
-GET /coins/id
+// SHOW
+// GET /coins/id
 router.get('./coins/:id', (req, res, next) => {
   const coinID = req.params.id
 
