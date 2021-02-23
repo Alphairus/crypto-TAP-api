@@ -1,6 +1,6 @@
 #!/bin/bash
 
-API=" https://whispering-depths-77462.herokuapp.com"
+API="http://localhost:4741"
 URL_PATH="/coins"
 
 curl "${API}${URL_PATH}" \
@@ -15,3 +15,5 @@ curl "${API}${URL_PATH}" \
       "blockchain": "'"${BLOCKCHAIN}"'"
     }
   }'
+
+  echo

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-API=" https://whispering-depths-77462.herokuapp.com"
+API="http://localhost:4741"
 URL_PATH="/coins"
 
 curl "${API}${URL_PATH}/${ID}" \
