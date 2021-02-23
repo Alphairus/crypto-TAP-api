@@ -37,9 +37,20 @@ router.get('/coins', (req, res, next) => {
     .catch(next)
 })
 
+// SHOW
+// GET /coins/id
+router.get('./coins/:id', (req, res, next) => {
+  Coin.findById(req.params.id)
+    .then(handle404)
+    .then(coin => res.status(200).json({ coin: coin.toObject() }))
+    .catch(next)
+  })
+
 // UPDATE
 // PATCH /coins/id
 router.patch('/coins/:id', requireToken, removeBlanks, (req, res, next) => {
+  delete req.body.coin.owner
+
   Coin.findById(req.params.id)
     .then(handle404)
     .then(coin => {
@@ -63,16 +74,4 @@ router.delete('/coins/:id', requireToken, (req, res, next) => {
     .catch(next)
 })
 
-// SHOW
-// GET /coins/id
-router.get('./coins/:id', (req, res, next) => {
-  const coinID = req.params.id
-
-  Coin.findById(coinID)
-    .then(handle404)
-    .then(coin => {
-      res.status(200).json({ coin: coin })
-
-    })
-})
 module.exports = router
