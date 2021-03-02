@@ -1,7 +1,7 @@
 const express = require('express')
 const passport = require('passport')
 
-const Coin = require('../models/coins')
+const Coin = require('../models/coin')
 
 const customErrors = require('../../lib/custom_errors')
 const handle404 = customErrors.handle404
@@ -17,6 +17,7 @@ const router = express.Router()
 // POST /coins
 router.post('/coins', requireToken, (req, res, next) => {
   req.body.coin.owner = req.user.id
+
   Coin.create(req.body.coin)
   .then(coin => {
     res.status(201).json({ coin: coin.toObject() })
@@ -26,9 +27,11 @@ router.post('/coins', requireToken, (req, res, next) => {
 
 // INDEX
 // GET /coins
-router.get('/coins', (req, res, next) => {
-  Coin.find()
-    .then(coins => coins.map(coin => coin.toObject()))
+router.get('/coins', requireToken, (req, res, next) => {
+  Coin.find(req.user._id)
+    .then(coins => {
+      return coins.map(coin => coin.toObject())
+    })
     .then(coins => res.status(200).json({ coins: coins }))
     .catch(next)
 })
