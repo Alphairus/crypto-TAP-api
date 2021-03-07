@@ -15,7 +15,7 @@ const router = express.Router()
 
 //CREATE
 // POST /coins
-router.post('/coins', requireToken, (req, res, next) => {
+router.post('/coins/', requireToken, (req, res, next) => {
   req.body.coin.owner = req.user.id
 
   Coin.create(req.body.coin)
@@ -28,7 +28,7 @@ router.post('/coins', requireToken, (req, res, next) => {
 // INDEX
 // GET /coins
 router.get('/coins', requireToken, (req, res, next) => {
-  Coin.find(req.user._id)
+  Coin.find({ owner: req.user._id })
     .then(coins => {
       return coins.map(coin => coin.toObject())
     })
@@ -37,8 +37,8 @@ router.get('/coins', requireToken, (req, res, next) => {
 })
 
 // SHOW
-// GET /coins/id
-router.get('./coins/:id', requireToken, (req, res, next) => {
+// GET /coins/60444502254f992ee42dff2e
+router.get('/coins/:id', requireToken, (req, res, next) => {
   Coin.findById(req.params.id)
     .then(handle404)
     .then(coin => res.status(200).json({ coin: coin.toObject() }))
@@ -46,7 +46,7 @@ router.get('./coins/:id', requireToken, (req, res, next) => {
   })
 
 // UPDATE
-// PATCH /coins/6031bd01bc64537670e9f055
+// PATCH /coins/60444502254f992ee42dff2e
 router.patch('/coins/:id', requireToken, removeBlanks, (req, res, next) => {
   delete req.body.coin.owner
 
@@ -61,7 +61,7 @@ router.patch('/coins/:id', requireToken, removeBlanks, (req, res, next) => {
 })
 
 // DESTROY
-// DELETE coins/6031bd01bc64537670e9f055
+// DELETE coins/60444502254f992ee42dff2e
 router.delete('/coins/:id', requireToken, (req, res, next) => {
   Coin.findById(req.params.id)
     .then(handle404)

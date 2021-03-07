@@ -13,13 +13,23 @@ const coinSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: false
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  toObject: {
+    transform: (_doc, coin) => {
+      return {
+        id: coin._id,
+        name: coin.name,
+        ticker: coin.ticker,
+        blockchain: coin.blockchain
+      }
+    }
+  }
 })
 
 module.exports = mongoose.model('Coin', coinSchema)
