@@ -22,8 +22,7 @@ zip file.
 ## Tasks
 | Command | Effect |
 |-----------------------|---------------------------------------------------|
-| `npm run server`      | Starts a development server with `nodemon` that
-                          automatically refreshes when you change something |
+| `npm run server`      | Starts a development server with `nodemon` that automatically refreshes when you change something |
 | `npm test`            | Runs automated tests.                             |
 | `npm run debug-server`| Starts the server in debug mode                   |
 
