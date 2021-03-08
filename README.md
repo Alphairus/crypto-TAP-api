@@ -1,4 +1,4 @@
-# crypto-TAP
+# Crypto-TAP
 
 The API for the Crypto-TAP database! This API has models for `Users`and `Coins`
 and connects the relationship between `Users` and `Coins`.
